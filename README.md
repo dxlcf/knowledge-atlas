@@ -1,0 +1,124 @@
+# Knowledge Atlas
+
+**A personal knowledge atlas, continuously refined with AI agents.**
+
+一套由 AI Agent 辅助维护个人知识库的轻量级方法与仓库模板，用于知识记录、结构化整理、学习资源分析与知识体系的持续演进。
+
+## 仓库定位
+
+**上游仓库维护通用方法，用户克隆后绑定自己的远程仓库，即可积累个人知识。**
+
+| 仓库 | 维护内容 | 使用方式 |
+| --- | --- | --- |
+| Knowledge Atlas 上游仓库 | 目录约定、Agent 规范、工作流 Skills、使用指南 | 改进和分发通用方法，不积累个人笔记 |
+| 个人知识仓库 | 自己的 Inbox、Maps、Notes、Sources，以及按需定制的规则 | 克隆并打开后，由 Agent 绑定自己的远程仓库，独立演进 |
+
+四个知识目录是可直接使用的起步骨架，无须切换仓库角色或修改配置。个人学习记录保存在自己的仓库，不提交到上游；对方法的改进可以独立贡献回来。
+
+个人使用请从 [个人使用指南](docs/personal-use.md) 开始。
+
+## 项目简介
+
+Knowledge Atlas 以 **Markdown + Git** 为基础，以**知识大纲（Knowledge Maps）**为核心，通过 AI Agent 协助完成知识的提取、去重、归纳和更新。
+
+它希望解决知识零散、重复学习、缺乏体系和整理成本高的问题，建立一套结构清晰、内容精炼、易于检索、持续完善的个人知识体系，而不是收集尽可能多的资料。
+
+## 核心模块
+
+| 模块 | 入口 | 职责 |
+| --- | --- | --- |
+| Inbox | [临时笔记](inbox/README.md) | 随手记录，暂存未经整理的知识 |
+| Maps | [知识大纲](maps/README.md) | 维护知识层级、掌握程度和笔记索引 |
+| Notes | [精炼知识](notes/README.md) | 保存具有长期复用价值的知识 |
+| Sources | [外部资料](sources/README.md) | 保存来源分析、知识增量和阅读建议 |
+
+**Inbox** 是知识的快速入口，无须在记录时分类。可以记录想法、问题、学习发现，再按需交给 Agent 整理。
+
+**Maps** 是仓库的核心。通过简洁的分层大纲定位知识、回顾主题全貌、发现缺口，并链接到笔记。掌握程度由用户判断，不能根据笔记是否存在推断。
+
+**Notes** 围绕明确的知识点记录核心概念、关键机制、实践要点和必要限制。一个知识点尽量对应一份规范化笔记，新增知识优先融入已有内容，避免复制长篇教程或 Agent 回答。
+
+**Sources** 记录开源项目、官方文档、技术文章等来源的分析。对照已有知识，区分已覆盖、值得新增和需要深化的内容，提供可追溯的引用与重点阅读建议。
+
+## 开始使用
+
+1. 克隆本仓库，在 Agent 中打开并授权，再按 [个人使用指南](docs/personal-use.md) 让它绑定自己的空远程仓库，即可使用，无须修改配置。
+2. 在个人仓库中随手记录，或直接让 Agent 将想法保存到 Inbox。
+3. 需要时让 Agent 整理知识，查看结果并确认大纲调整方案。
+
+个人仓库初始不预设知识主题。首次整理时，Agent 会提出最小主题大纲建议；确认后才建立主题大纲。可直接写入的精炼笔记会先保存，并在结果中说明尚待确认的索引位置。
+
+## Agent 工作流
+
+| 工作流 | 示例指令 | 预期结果 | Skill |
+| --- | --- | --- | --- |
+| 整理笔记 | 整理最近的 Inbox | 提取、归类、去重、合并知识 | [organize-inbox](.agents/skills/organize-inbox/SKILL.md) |
+| 分析资料 | 分析这个 GitHub 项目：URL | 知识增量、阅读建议、来源引用 | [analyze-source](.agents/skills/analyze-source/SKILL.md) |
+| 沉淀知识 | 将刚才的回答整理到知识库 | 提炼核心结论，新增或更新 Notes | [distill-knowledge](.agents/skills/distill-knowledge/SKILL.md) |
+| 优化大纲 | 检查当前知识大纲 | 识别重复、缺口和结构问题 | [refine-map](.agents/skills/refine-map/SKILL.md) |
+
+普通问答默认不修改仓库。“分析资料”默认只返回分析；需要保存时可说“分析并保存到 Sources”。Agent 更新知识前先检索相关 Maps 和 Notes，不把未确认的建议当作知识事实。
+
+## 仓库结构
+
+```text
+knowledge-atlas/
+├── README.md
+├── AGENTS.md
+├── docs/
+│   └── personal-use.md
+├── inbox/
+│   └── README.md
+├── maps/
+│   └── README.md
+├── notes/
+│   └── README.md
+├── sources/
+│   └── README.md
+└── .agents/
+    └── skills/
+        ├── organize-inbox/SKILL.md
+        ├── analyze-source/SKILL.md
+        ├── distill-knowledge/SKILL.md
+        └── refine-map/SKILL.md
+```
+
+目录说明内提供可复制的最小格式。主题、子目录、独立模板和辅助工具都按实际需要增加。
+
+## 工作原则
+
+- **大纲优先**：优先读取相关大纲，通过大纲组织与定位知识。
+- **增量更新**：创建前检索已有内容，优先补充和合并。
+- **内容精炼**：保留核心概念、机制与适用边界，减少重复描述。
+- **来源可追溯**：尽量引用原始来源，重要代码引用优先使用固定版本链接。
+- **按需沉淀**：仅在明确要求时更新长期知识，不自动保存所有对话。
+- **人工主导**：Agent 提供分析与修改建议，用户保留对知识体系的最终控制权。
+- **轻量开放**：采用 Markdown 和 Git，不依赖特定 Agent 框架、数据库或知识管理平台。
+
+## 技术方案
+
+| 组件 | 方案 |
+| --- | --- |
+| 知识存储 | Markdown |
+| 版本管理 | Git |
+| 知识组织 | 分层大纲 + 相对文件链接 |
+| Agent 规则 | AGENTS.md |
+| Agent 能力 | 项目级 Skills |
+| 外部资料 | URL + 精炼分析 + 来源引用 |
+| 检索方式 | 大纲导航 + 文件检索，按需扩展 |
+
+Agent 优先读取相关大纲，再按需加载笔记与资料，减少不必要的上下文消耗。仓库无需安装依赖、启动服务或构建应用。
+
+## 项目目标
+
+**记录知识 → 整理归纳 → 更新大纲 → 发现缺口 → 深入学习 → 持续完善**
+
+让知识库既能记录已经学过的内容，也能帮助判断下一步学习什么、哪些资源具有增量价值，最终成为一份不断演进、能够快速检索与复用的个人知识地图。
+
+## GitHub 仓库信息
+
+**Repository:** `knowledge-atlas`
+
+**Description:** A lightweight, agent-assisted knowledge repository for structured learning, knowledge distillation, and continuous evolution.
+
+**Topics:** `knowledge-management` · `knowledge-base` · `ai-agent` · `markdown` · `personal-knowledge`
