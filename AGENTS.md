@@ -28,6 +28,8 @@
 
 ## 内容与文件约定
 
+- 生成或调整知识大纲时，先划定主题边界，再决定是否拆分。一个主题可以由总纲和多级子纲组成：总纲说明范围并导航，子纲按可独立检索的知识域展开。跨主题的通用基础优先链接已有大纲或笔记；暂无可链接的内容时，先列为待补条目，不创建空文件。窄主题可以保留单页，不强制目录深度。
+- `maps/` 及其各级主题目录统一用各自的 `README.md` 作为唯一索引和总纲入口。启用主题目录后，总纲与该主题的子纲集中放在目录内；需要进一步分层的子主题放入直属子目录，并由上级索引链接到子目录的 `README.md`。
 - 一个知识点尽量对应一份笔记；相关但不同的概念使用相互链接，不强行合并。
 - 使用 UTF-8 Markdown、清晰标题和稳定文件名。默认使用简短小写英文连字符文件名，中文标题；沿用用户已有命名习惯。
 - 链接使用相对于当前文件的路径。重命名或移动时检查入链，避免断链；不要创建指向尚不存在文件的链接。
@@ -50,7 +52,7 @@
 - 整理 Inbox：[organize-inbox](.agents/skills/organize-inbox/SKILL.md)。
 - 分析资料：[analyze-source](.agents/skills/analyze-source/SKILL.md)。
 - 沉淀回答或指定内容：[distill-knowledge](.agents/skills/distill-knowledge/SKILL.md)。
-- 检查与优化大纲：[refine-map](.agents/skills/refine-map/SKILL.md)。
+- 生成、检查与优化大纲：[refine-map](.agents/skills/refine-map/SKILL.md)。
 
 ## 完成检查与交付
 
